@@ -110,22 +110,6 @@ module.exports = function(grunt) {
         parseFiles: true
       }
     },
-    version: {
-      default: {
-        options: {
-          format: true,
-          length: 32,
-          manifest: 'assets/manifest.json',
-          querystring: {
-            style: 'roots_css',
-            script: 'roots_js'
-          }
-        },
-        files: {
-          'lib/scripts.php': 'assets/{css,js}/{main,scripts}.min.{css,js}'
-        }
-      }
-    },
     watch: {
       less: {
         files: [
@@ -150,8 +134,8 @@ module.exports = function(grunt) {
         files: [
           'assets/css/main.css',
           'assets/js/scripts.js',
-          'templates/*.php',
-          '*.php'
+          'templates/*.html',
+          '*.html'
         ]
       }
     },
@@ -160,9 +144,9 @@ module.exports = function(grunt) {
         cssmin: true,
         uglify: true
       },
-			dist: {
+			build: {
 				src: [ 'index.html' ],
-				dest: ['../release/']
+				dest: ['../build/']
 			}
 		}
 	});
@@ -183,6 +167,6 @@ module.exports = function(grunt) {
     'autoprefixer:build',
     'uglify',
     'modernizr',
-    'version'
+    'inline:build'
   ]);
 };
