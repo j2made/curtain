@@ -13,5 +13,5 @@ The one page, temp page, cover up that broken website for a minute page project 
 [Master](https://github.com/emaildano/curtain/archive/master.zip)
 
 ### Install Grunt and Bower
-1. `Install grunt-cli and bower globally with npm install -g grunt-cli bower.`
+1. Install grunt-cli and bower globally with `npm install -g grunt-cli bower`
 2. Run `npm install`
