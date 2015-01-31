@@ -10,7 +10,7 @@
 
 ## Installation
 
-### Clone or download the repo.
+#####Clone or download the repo.
 
 #### Clone
 `git clone https://github.com/emaildano/curtain.git`
