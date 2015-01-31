@@ -163,6 +163,15 @@ module.exports = function(grunt) {
     'build'
   ]);
 
+  grunt.registerTask('dev', [
+    'jshint',
+    'less:build',
+    'autoprefixer:build',
+    'uglify',
+    'modernizr',
+    'inline:build'
+  ]);
+
   grunt.registerTask('build', [
     'jshint',
     'less:build',
