@@ -6,18 +6,18 @@ module.exports = function(grunt) {
   require('time-grunt')(grunt);
 
   var jsFileList = [
-    'assets/vendor/bootstrap/js/transition.js',
-    'assets/vendor/bootstrap/js/alert.js',
-    'assets/vendor/bootstrap/js/button.js',
-    'assets/vendor/bootstrap/js/carousel.js',
-    'assets/vendor/bootstrap/js/collapse.js',
-    'assets/vendor/bootstrap/js/dropdown.js',
-    'assets/vendor/bootstrap/js/modal.js',
-    'assets/vendor/bootstrap/js/tooltip.js',
-    'assets/vendor/bootstrap/js/popover.js',
-    'assets/vendor/bootstrap/js/scrollspy.js',
-    'assets/vendor/bootstrap/js/tab.js',
-    'assets/vendor/bootstrap/js/affix.js',
+    'bower_components/bootstrap/js/transition.js',
+    'bower_components/bootstrap/js/alert.js',
+    'bower_components/bootstrap/js/button.js',
+    'bower_components/bootstrap/js/carousel.js',
+    'bower_components/bootstrap/js/collapse.js',
+    'bower_components/bootstrap/js/dropdown.js',
+    'bower_components/bootstrap/js/modal.js',
+    'bower_components/bootstrap/js/tooltip.js',
+    'bower_components/bootstrap/js/popover.js',
+    'bower_components/bootstrap/js/scrollspy.js',
+    'bower_components/bootstrap/js/tab.js',
+    'bower_components/bootstrap/js/affix.js',
     'assets/js/plugins/*.js',
     'assets/js/_*.js'
   ];
@@ -95,7 +95,7 @@ module.exports = function(grunt) {
     },
     modernizr: {
       build: {
-        devFile: 'assets/vendor/modernizr/modernizr.js',
+        devFile: 'bower_components/modernizr/modernizr.js',
         outputFile: 'assets/js/vendor/modernizr.min.js',
         files: {
           'src': [
@@ -116,20 +116,36 @@ module.exports = function(grunt) {
           'assets/less/*.less',
           'assets/less/**/*.less'
         ],
-        tasks: ['less:dev', 'autoprefixer:dev']
+        tasks: [
+          'less:dev',
+          'autoprefixer:dev',
+          'inline:build'
+        ]
       },
       js: {
         files: [
           jsFileList,
           '<%= jshint.all %>'
         ],
-        tasks: ['jshint', 'concat']
+        tasks: [
+          'jshint', 'concat',
+          'inline:build'
+        ]
+      },
+      html: {
+        files: [
+          '*.html',
+          'templates/**/*.html'
+        ],
+        tasks: [
+          'inline:build'
+        ]
       },
       livereload: {
         // Browser live reloading
         // https://github.com/gruntjs/grunt-contrib-watch#live-reloading
         options: {
-          livereload: false
+          livereload: true
         },
         files: [
           'assets/css/main.css',
@@ -140,27 +156,18 @@ module.exports = function(grunt) {
       }
     },
 		inline: {
-      options:{
-        cssmin: true,
-        uglify: true
-      },
 			build: {
-				src: [ 'index.html' ],
-				dest: ['../build/']
+        src: 'index.html',
+        dest: 'dist/index.html'
 			}
 		}
 	});
 
   // Register tasks
   grunt.registerTask('default', [
-    'dev'
+    'build'
   ]);
-  grunt.registerTask('dev', [
-    'jshint',
-    'less:dev',
-    'autoprefixer:dev',
-    'concat'
-  ]);
+
   grunt.registerTask('build', [
     'jshint',
     'less:build',
